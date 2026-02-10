@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/Toast";
+import ProjectContextEditor from "@/components/ops/ProjectContextEditor";
 
 interface PolicyItem {
   key: string;
@@ -156,6 +157,9 @@ export default function SettingsPage() {
             Save Auto-Approve Settings
           </button>
         </section>
+
+        {/* Project Context Editor */}
+        <ProjectContextEditor />
 
         {/* Raw policies (read-only view) */}
         <section className="bg-white rounded-lg p-5 border border-[#E8E5E0] shadow-sm">

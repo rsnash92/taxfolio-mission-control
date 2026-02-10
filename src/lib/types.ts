@@ -112,3 +112,13 @@ export interface SquadMessage {
   reference_id: string | null;
   created_at: string;
 }
+
+export interface ContextSection {
+  id: string;
+  section: string;
+  title: string;
+  content: string;
+  updated_by: string;
+  updated_at: string;
+  created_at: string;
+}

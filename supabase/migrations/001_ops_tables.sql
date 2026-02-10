@@ -144,6 +144,18 @@ CREATE TABLE IF NOT EXISTS ops_hmrc_updates (
 CREATE INDEX IF NOT EXISTS idx_hmrc_urgency ON ops_hmrc_updates(urgency);
 CREATE INDEX IF NOT EXISTS idx_hmrc_created ON ops_hmrc_updates(created_at DESC);
 
+-- 11. Project context (agent briefing doc)
+CREATE TABLE IF NOT EXISTS ops_project_context (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  section TEXT NOT NULL UNIQUE,
+  title TEXT NOT NULL,
+  content TEXT DEFAULT '',
+  updated_by TEXT DEFAULT 'rob',
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_context_section ON ops_project_context(section);
+
 -- Seed default policies
 INSERT INTO ops_policy (key, value) VALUES
   ('x_daily_quota', '{"limit": 10}'),
