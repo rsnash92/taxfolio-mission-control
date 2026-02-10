@@ -20,9 +20,6 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const { error: authError } = await requireAuth();
-  if (authError) return authError;
-
   const sb = createServiceClient();
   const body = await req.json();
 

@@ -32,7 +32,7 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isPublicRoute =
     pathname === "/login" ||
-    pathname.startsWith("/api/ops/heartbeat") ||
+    pathname.startsWith("/api/ops") ||
     pathname === "/robots.txt";
 
   if (!user && !isPublicRoute) {
