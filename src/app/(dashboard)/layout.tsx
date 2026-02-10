@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useDashboardData } from "@/hooks/useDashboardData";
 import TopBar from "@/components/TopBar";
 import NavBar from "@/components/NavBar";
@@ -45,6 +45,19 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [profileAgent, setProfileAgent] = useState<string | null>(null);
   const [systemPaused, setSystemPaused] = useState(false);
 
+  // Fetch real system pause state from DB on mount
+  useEffect(() => {
+    fetch("/api/ops/agent-status")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          const system = data.find((a: { agent_id: string }) => a.agent_id === "system");
+          if (system) setSystemPaused(!system.is_active);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const shortcutHandlers = useMemo(() => ({
     onNewMission: () => setShowNewMission(true),
     onBroadcast: () => setShowBroadcast(true),
@@ -60,19 +73,19 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }), []);
   useKeyboardShortcuts(shortcutHandlers);
 
-  const handleTogglePause = async () => {
-    const newState = !systemPaused;
-    setSystemPaused(newState);
+  const handleTogglePause = useCallback(async () => {
+    const newPaused = !systemPaused;
+    setSystemPaused(newPaused);
     try {
-      await fetch("/api/ops/settings", {
+      await fetch("/api/ops/agent-status", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ key: "system_paused", value: { enabled: newState } }),
+        body: JSON.stringify({ agent_id: "system", is_active: !newPaused }),
       });
     } catch {
-      setSystemPaused(!newState);
+      setSystemPaused(!newPaused);
     }
-  };
+  }, [systemPaused]);
 
   return (
     <DashboardContext.Provider
