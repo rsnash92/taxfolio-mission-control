@@ -1,14 +1,15 @@
 export const COLUMNS = [
-  { key: "queued", label: "Queued", color: "#64748B" },
-  { key: "running", label: "In Progress", color: "#3B82F6" },
-  { key: "succeeded", label: "Done", color: "#10B981" },
-  { key: "failed", label: "Failed", color: "#EF4444" },
+  { key: "inbox", label: "INBOX", color: "#F59E0B", source: "proposals" as const },
+  { key: "assigned", label: "ASSIGNED", color: "#64748B", source: "missions" as const },
+  { key: "in_progress", label: "IN PROGRESS", color: "#3B82F6", source: "missions" as const },
+  { key: "review", label: "REVIEW", color: "#8B5CF6", source: "approvals" as const },
+  { key: "done", label: "DONE", color: "#10B981", source: "missions" as const },
 ];
 
 export const VERDICT_STYLES: Record<string, { bg: string; color: string; label: string }> = {
-  pass: { bg: "#D1FAE530", color: "#6EE7B7", label: "PASS" },
-  pass_with_notes: { bg: "#FEF3C730", color: "#FCD34D", label: "PASS WITH NOTES" },
-  fail: { bg: "#FEE2E230", color: "#FCA5A5", label: "FAIL" },
+  pass: { bg: "#D1FAE560", color: "#059669", label: "PASS" },
+  pass_with_notes: { bg: "#FEF3C760", color: "#D97706", label: "PASS WITH NOTES" },
+  fail: { bg: "#FEE2E260", color: "#DC2626", label: "FAIL" },
 };
 
 export const TYPE_ICONS: Record<string, string> = {

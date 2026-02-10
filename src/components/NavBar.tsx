@@ -15,7 +15,7 @@ export default function NavBar() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-slate-800 border-b border-slate-700 px-5 shrink-0">
+    <nav className="bg-white border-b border-[#E8E5E0] px-5 shrink-0">
       <div className="flex gap-1">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.href;
@@ -25,8 +25,8 @@ export default function NavBar() {
               href={item.href}
               className={`px-3 py-2 text-[11px] font-semibold border-b-2 transition-colors ${
                 isActive
-                  ? "text-slate-100 border-violet-500"
-                  : "text-slate-500 border-transparent hover:text-slate-300"
+                  ? "text-[#1A1A1A] border-[#E8952E]"
+                  : "text-[#6B6B6B] border-transparent hover:text-[#1A1A1A]"
               }`}
             >
               {item.label}

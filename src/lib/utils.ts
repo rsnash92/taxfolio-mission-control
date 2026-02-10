@@ -12,6 +12,18 @@ export function timeAgo(dateStr: string): string {
   return `${days}d ago`;
 }
 
+const FALLBACK_AGENT = {
+  id: "unknown",
+  name: "Unknown",
+  role: "",
+  icon: "\u2753",
+  color: "#64748B",
+  rank: "INT" as const,
+  rankColor: "#9CA3AF",
+  about: "",
+  skills: [] as string[],
+};
+
 export function getAgent(id: string): Agent {
-  return AGENTS[id as keyof typeof AGENTS] ?? { id, name: id, role: "", icon: "\u2753", color: "#64748B" };
+  return AGENTS[id as keyof typeof AGENTS] ?? { ...FALLBACK_AGENT, id, name: id };
 }

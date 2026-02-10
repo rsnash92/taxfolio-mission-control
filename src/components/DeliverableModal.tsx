@@ -25,17 +25,17 @@ export default function DeliverableModal({ isOpen, onClose, table, id }: Deliver
   }, [isOpen, table, id]);
 
   const renderContent = () => {
-    if (loading) return <div className="text-slate-500 text-sm py-8 text-center">Loading...</div>;
-    if (!data) return <div className="text-slate-500 text-sm py-8 text-center">Could not load deliverable</div>;
+    if (loading) return <div className="text-[#6B6B6B] text-sm py-8 text-center">Loading...</div>;
+    if (!data) return <div className="text-[#6B6B6B] text-sm py-8 text-center">Could not load deliverable</div>;
 
     if (table === "ops_tweet_drafts") {
       const text = (data.tweet_text || data.body || "") as string;
       return (
         <div>
-          <div className="bg-slate-900 rounded-lg p-4 border border-slate-700">
-            <p className="text-sm text-slate-100 leading-relaxed whitespace-pre-wrap">{text}</p>
+          <div className="bg-[#F5F4F0] rounded-lg p-4 border border-[#E8E5E0]">
+            <p className="text-sm text-[#1A1A1A] leading-relaxed whitespace-pre-wrap">{text}</p>
           </div>
-          <div className="mt-2 text-[10px] text-slate-500">{text.length}/280 characters</div>
+          <div className="mt-2 text-[10px] text-[#6B6B6B]">{text.length}/280 characters</div>
         </div>
       );
     }
@@ -45,25 +45,24 @@ export default function DeliverableModal({ isOpen, onClose, table, id }: Deliver
       const title = (data.title || "") as string;
       return (
         <div>
-          {title && <h3 className="text-base font-bold text-slate-100 mb-3">{title}</h3>}
-          <div className="bg-slate-900 rounded-lg p-4 border border-slate-700 max-h-[50vh] overflow-y-auto">
-            <div className="text-sm text-slate-200 leading-relaxed whitespace-pre-wrap">{body}</div>
+          {title && <h3 className="text-base font-bold text-[#1A1A1A] mb-3">{title}</h3>}
+          <div className="bg-[#F5F4F0] rounded-lg p-4 border border-[#E8E5E0] max-h-[50vh] overflow-y-auto">
+            <div className="text-sm text-[#2D2D2D] leading-relaxed whitespace-pre-wrap">{body}</div>
           </div>
-          <div className="mt-2 text-[10px] text-slate-500">
+          <div className="mt-2 text-[10px] text-[#6B6B6B]">
             {body.split(/\s+/).filter(Boolean).length} words
           </div>
         </div>
       );
     }
 
-    // Dev deliverables or unknown
     const title = (data.title || "") as string;
     const description = (data.description || data.body || "") as string;
     return (
       <div>
-        {title && <h3 className="text-base font-bold text-slate-100 mb-3">{title}</h3>}
-        <div className="bg-slate-900 rounded-lg p-4 border border-slate-700 max-h-[50vh] overflow-y-auto">
-          <pre className="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap font-mono">{description}</pre>
+        {title && <h3 className="text-base font-bold text-[#1A1A1A] mb-3">{title}</h3>}
+        <div className="bg-[#F5F4F0] rounded-lg p-4 border border-[#E8E5E0] max-h-[50vh] overflow-y-auto">
+          <pre className="text-xs text-[#2D2D2D] leading-relaxed whitespace-pre-wrap font-mono">{description}</pre>
         </div>
       </div>
     );

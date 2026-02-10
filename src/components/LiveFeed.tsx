@@ -21,21 +21,21 @@ export default function LiveFeed({ events }: LiveFeedProps) {
   });
 
   return (
-    <aside className="w-80 bg-slate-800 border-l border-slate-700 flex flex-col shrink-0">
-      <div className="px-3.5 py-2.5 border-b border-slate-700 flex items-center gap-2">
-        <span className="font-bold text-sm text-slate-100">Live Feed</span>
+    <aside className="w-80 bg-white border-l border-[#E8E5E0] flex flex-col shrink-0">
+      <div className="px-3.5 py-2.5 border-b border-[#E8E5E0] flex items-center gap-2">
+        <span className="font-bold text-sm text-[#1A1A1A]">Live Feed</span>
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_4px] shadow-emerald-500" />
       </div>
 
-      <div className="flex gap-1 px-3 py-1.5 border-b border-slate-700">
+      <div className="flex gap-1 px-3 py-1.5 border-b border-[#E8E5E0]">
         {["All", "Decisions", "System"].map((f) => (
           <button
             key={f}
             onClick={() => setFeedFilter(f)}
             className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-colors ${
               feedFilter === f
-                ? "bg-slate-100 text-slate-900"
-                : "text-slate-500 hover:text-slate-300"
+                ? "bg-[#1A1A1A] text-white"
+                : "text-[#6B6B6B] hover:text-[#1A1A1A]"
             }`}
           >
             {f}
@@ -45,7 +45,7 @@ export default function LiveFeed({ events }: LiveFeedProps) {
 
       <div className="flex-1 overflow-y-auto px-3 py-1.5">
         {filtered.length === 0 ? (
-          <div className="text-center py-12 text-[11px] text-slate-600">
+          <div className="text-center py-12 text-[11px] text-[#9CA3AF]">
             <div className="text-2xl mb-2">📡</div>
             Events will appear here once agents start running
           </div>
@@ -55,7 +55,7 @@ export default function LiveFeed({ events }: LiveFeedProps) {
             return (
               <div
                 key={e.id}
-                className="flex gap-2 py-2 border-b border-slate-800 text-[11px]"
+                className="flex gap-2 py-2 border-b border-[#F5F4F0] text-[11px]"
               >
                 <span
                   className="w-1.5 h-1.5 rounded-full mt-1 shrink-0"
@@ -66,11 +66,11 @@ export default function LiveFeed({ events }: LiveFeedProps) {
                     <span className="font-bold" style={{ color: agent.color }}>
                       @{agent.name}
                     </span>
-                    <span className="text-[9px] text-slate-500">{e.event_type}</span>
+                    <span className="text-[9px] text-[#9CA3AF]">{e.event_type}</span>
                   </div>
-                  <div className="text-slate-300 leading-snug">{e.title}</div>
+                  <div className="text-[#2D2D2D] leading-snug">{e.title}</div>
                 </div>
-                <span className="text-[9px] text-slate-600 shrink-0">
+                <span className="text-[9px] text-[#9CA3AF] shrink-0">
                   {timeAgo(e.created_at)}
                 </span>
               </div>

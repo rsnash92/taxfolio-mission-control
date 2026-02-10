@@ -34,9 +34,8 @@ export default function MissionDetailSlider({ isOpen, onClose, mission }: Missio
 
   return (
     <SlideOver isOpen={isOpen} onClose={onClose} title="Mission Detail">
-      {/* Header */}
       <div className="mb-5">
-        <h3 className="text-base font-bold text-slate-100 mb-2">{mission.title}</h3>
+        <h3 className="text-base font-bold text-[#1A1A1A] mb-2">{mission.title}</h3>
         <div className="flex flex-wrap gap-2 mb-3">
           <span
             className="text-[10px] font-bold px-2 py-0.5 rounded"
@@ -58,23 +57,21 @@ export default function MissionDetailSlider({ isOpen, onClose, mission }: Missio
           </span>
         </div>
         {mission.description && (
-          <p className="text-xs text-slate-400 leading-relaxed">{mission.description}</p>
+          <p className="text-xs text-[#6B6B6B] leading-relaxed">{mission.description}</p>
         )}
       </div>
 
-      {/* Timestamps */}
-      <div className="mb-5 text-[10px] text-slate-500 space-y-1">
+      <div className="mb-5 text-[10px] text-[#6B6B6B] space-y-1">
         <div>Created: {timeAgo(mission.created_at)}</div>
         {mission.completed_at && <div>Completed: {timeAgo(mission.completed_at)}</div>}
       </div>
 
-      {/* Tags */}
       {mission.tags?.length > 0 && (
         <div className="flex flex-wrap gap-1 mb-5">
           {mission.tags.map((t) => (
             <span
               key={t}
-              className="text-[9px] bg-slate-700 text-slate-400 px-1.5 py-0.5 rounded font-medium"
+              className="text-[9px] bg-[#F5F4F0] text-[#6B6B6B] px-1.5 py-0.5 rounded font-medium"
             >
               {t}
             </span>
@@ -82,16 +79,15 @@ export default function MissionDetailSlider({ isOpen, onClose, mission }: Missio
         </div>
       )}
 
-      {/* Steps */}
       <div>
-        <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-3">
+        <div className="text-[10px] font-semibold text-[#6B6B6B] uppercase tracking-wider mb-3">
           Steps ({steps.filter((s) => s.status === "succeeded").length}/{steps.length})
         </div>
         <div className="space-y-2">
           {steps.map((step) => (
             <div
               key={step.id}
-              className="flex items-start gap-3 bg-slate-900 rounded-lg p-3 border border-slate-700"
+              className="flex items-start gap-3 bg-[#F5F4F0] rounded-lg p-3 border border-[#E8E5E0]"
             >
               <span
                 className="text-sm mt-0.5"
@@ -101,16 +97,16 @@ export default function MissionDetailSlider({ isOpen, onClose, mission }: Missio
               </span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-semibold text-slate-100">{step.title}</span>
-                  <span className="text-[9px] bg-slate-700 text-slate-400 px-1.5 py-0.5 rounded">
+                  <span className="text-xs font-semibold text-[#1A1A1A]">{step.title}</span>
+                  <span className="text-[9px] bg-[#E8E5E0] text-[#6B6B6B] px-1.5 py-0.5 rounded">
                     {step.kind.replace(/_/g, " ")}
                   </span>
                 </div>
-                <div className="text-[10px] text-slate-500 mt-0.5 capitalize">
+                <div className="text-[10px] text-[#6B6B6B] mt-0.5 capitalize">
                   {step.status}
                 </div>
               </div>
-              <span className="text-[10px] text-slate-600">{step.step_order + 1}</span>
+              <span className="text-[10px] text-[#9CA3AF]">{step.step_order + 1}</span>
             </div>
           ))}
         </div>

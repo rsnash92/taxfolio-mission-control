@@ -9,8 +9,8 @@ import MissionDetailSlider from "@/components/MissionDetailSlider";
 import type { Mission } from "@/lib/types";
 
 export default function DashboardPage() {
-  const { missions, approvals, loading, selectedAgent, handleApproval } = useDashboard();
-  const [activeTab, setActiveTab] = useState<"approvals" | "missions">("approvals");
+  const { missions, approvals, proposals, loading, selectedAgent, handleApproval } = useDashboard();
+  const [activeTab, setActiveTab] = useState<"approvals" | "missions">("missions");
   const [selectedMission, setSelectedMission] = useState<Mission | null>(null);
 
   const filteredMissions = missions.filter(
@@ -37,6 +37,8 @@ export default function DashboardPage() {
       {activeTab === "missions" && (
         <KanbanBoard
           missions={missions}
+          proposals={proposals}
+          approvals={approvals}
           selectedAgent={selectedAgent}
           onMissionClick={(m) => setSelectedMission(m)}
         />

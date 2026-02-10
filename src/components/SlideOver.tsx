@@ -33,14 +33,14 @@ export default function SlideOver({ isOpen, onClose, title, children }: SlideOve
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex">
-      <div className="absolute inset-0 bg-black/50" onClick={onClose} />
-      <div className="ml-auto relative w-full max-w-xl bg-slate-800 border-l border-slate-700 shadow-2xl flex flex-col h-full">
+      <div className="absolute inset-0 bg-black/20" onClick={onClose} />
+      <div className="ml-auto relative w-full max-w-xl bg-white border-l border-[#E8E5E0] shadow-lg flex flex-col h-full">
         {title && (
-          <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-700 shrink-0">
-            <h2 className="text-sm font-bold text-slate-100">{title}</h2>
+          <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#E8E5E0] shrink-0">
+            <h2 className="text-sm font-bold text-[#1A1A1A]">{title}</h2>
             <button
               onClick={onClose}
-              className="text-slate-500 hover:text-slate-300 transition-colors text-lg leading-none"
+              className="text-[#6B6B6B] hover:text-[#1A1A1A] transition-colors text-lg leading-none"
             >
               &times;
             </button>

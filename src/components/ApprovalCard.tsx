@@ -37,14 +37,14 @@ export default function ApprovalCard({ approval, onApprove, onReject, onViewDeli
   };
 
   return (
-    <div className="bg-slate-800 rounded-xl p-5 border border-slate-700">
+    <div className="bg-white rounded-xl p-5 border border-[#E8E5E0] shadow-sm">
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center gap-3">
           <span className="text-xl">
             {TYPE_ICONS[approval.deliverable_type] ?? "\u{1F4C4}"}
           </span>
           <div>
-            <div className="text-sm font-bold text-slate-100">{approval.title}</div>
+            <div className="text-sm font-bold text-[#1A1A1A]">{approval.title}</div>
             <div className="flex gap-2 mt-1.5 items-center">
               <span
                 className="text-[10px] font-semibold px-1.5 py-0.5 rounded"
@@ -61,17 +61,17 @@ export default function ApprovalCard({ approval, onApprove, onReject, onViewDeli
             </div>
           </div>
         </div>
-        <span className="text-[10px] text-slate-500">
+        <span className="text-[10px] text-[#6B6B6B]">
           {timeAgo(approval.created_at)}
         </span>
       </div>
 
       {approval.summary && (
-        <div className="bg-slate-900 rounded-md p-3 mb-4 border-l-[3px] border-slate-600">
-          <span className="text-[10px] text-slate-500 font-semibold">
+        <div className="bg-[#F5F4F0] rounded-md p-3 mb-4 border-l-[3px] border-[#D4D1CC]">
+          <span className="text-[10px] text-[#6B6B6B] font-semibold">
             SHIELD SUMMARY:
           </span>
-          <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+          <p className="text-xs text-[#2D2D2D] mt-1 leading-relaxed">
             {approval.summary}
           </p>
         </div>
@@ -80,14 +80,14 @@ export default function ApprovalCard({ approval, onApprove, onReject, onViewDeli
       <div className="flex gap-2 justify-between">
         <button
           onClick={() => onViewDeliverable(approval.deliverable_table, approval.deliverable_id)}
-          className="px-3 py-1.5 text-[11px] font-semibold rounded-md text-slate-400 hover:text-slate-200 bg-slate-700 hover:bg-slate-600 transition-colors"
+          className="px-3 py-1.5 text-[11px] font-semibold rounded-md text-[#6B6B6B] hover:text-[#1A1A1A] bg-[#F5F4F0] hover:bg-[#E8E5E0] transition-colors"
         >
           View Full
         </button>
         <div className="flex gap-2">
           <button
             onClick={() => onRejectWithNotes(approval.id, approval.title)}
-            className="px-3.5 py-1.5 text-[11px] font-semibold rounded-md bg-red-900/20 border border-red-900/40 text-red-300 hover:bg-red-900/30 transition-colors"
+            className="px-3.5 py-1.5 text-[11px] font-semibold rounded-md bg-red-50 border border-red-200 text-red-600 hover:bg-red-100 transition-colors"
           >
             ✗ Reject
           </button>
@@ -95,7 +95,7 @@ export default function ApprovalCard({ approval, onApprove, onReject, onViewDeli
             onClick={handleApproveClick}
             className={`px-4 py-1.5 text-[11px] font-bold rounded-md transition-colors ${
               confirming
-                ? "bg-amber-600 text-white hover:bg-amber-500"
+                ? "bg-amber-500 text-white hover:bg-amber-600"
                 : "bg-emerald-500 text-white hover:bg-emerald-600"
             }`}
           >

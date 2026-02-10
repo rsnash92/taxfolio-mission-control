@@ -14,15 +14,15 @@ export default function TabSwitcher({ activeTab, onTabChange, approvalCount, mis
   ];
 
   return (
-    <div className="flex bg-slate-800 border-b border-slate-700 shrink-0">
+    <div className="flex bg-white border-b border-[#E8E5E0] shrink-0">
       {tabs.map((tab) => (
         <button
           key={tab.key}
           onClick={() => onTabChange(tab.key)}
           className={`px-4 py-2.5 text-xs font-semibold flex items-center gap-2 border-b-2 transition-colors ${
             activeTab === tab.key
-              ? "text-slate-100"
-              : "text-slate-500 border-transparent hover:text-slate-300"
+              ? "text-[#1A1A1A]"
+              : "text-[#6B6B6B] border-transparent hover:text-[#1A1A1A]"
           }`}
           style={{
             borderBottomColor: activeTab === tab.key ? tab.accent : "transparent",
@@ -32,8 +32,8 @@ export default function TabSwitcher({ activeTab, onTabChange, approvalCount, mis
           <span
             className="px-1.5 rounded-full text-[10px] font-bold"
             style={{
-              background: activeTab === tab.key ? `${tab.accent}30` : "#334155",
-              color: activeTab === tab.key ? tab.accent : "#64748B",
+              background: activeTab === tab.key ? `${tab.accent}30` : "#E8E5E0",
+              color: activeTab === tab.key ? tab.accent : "#6B6B6B",
             }}
           >
             {tab.count}

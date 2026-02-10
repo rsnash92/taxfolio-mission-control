@@ -1,17 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: 'JetBrains Mono', monospace;
-  background: #0F172A;
-  color: #E2E8F0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #FAFAF8;
+  color: #1A1A1A;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #1E293B; }
-::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #475569; }
+::-webkit-scrollbar-track { background: #F5F4F0; }
+::-webkit-scrollbar-thumb { background: #D4D1CC; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #B8B5B0; }

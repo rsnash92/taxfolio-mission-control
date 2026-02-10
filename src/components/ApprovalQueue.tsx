@@ -19,18 +19,18 @@ export default function ApprovalQueue({ approvals, loading, onApproval }: Approv
   return (
     <div className="flex-1 p-5 overflow-y-auto">
       {loading ? (
-        <div className="text-center py-16 text-slate-500 text-sm">Loading...</div>
+        <div className="text-center py-16 text-[#6B6B6B] text-sm">Loading...</div>
       ) : approvals.length === 0 ? (
         <div className="text-center py-16">
           <div className="text-4xl mb-3">✅</div>
-          <div className="text-base font-semibold text-slate-400">All clear</div>
-          <div className="text-xs text-slate-500 mt-1">No items awaiting your approval</div>
+          <div className="text-base font-semibold text-[#6B6B6B]">All clear</div>
+          <div className="text-xs text-[#9CA3AF] mt-1">No items awaiting your approval</div>
         </div>
       ) : (
         <div className="max-w-3xl mx-auto space-y-3">
           <div className="mb-4">
-            <h2 className="text-base font-bold text-slate-100">Awaiting Your Approval</h2>
-            <p className="text-[11px] text-slate-500 mt-0.5">
+            <h2 className="text-base font-bold text-[#1A1A1A]">Awaiting Your Approval</h2>
+            <p className="text-[11px] text-[#6B6B6B] mt-0.5">
               Reviewed by Shield — needs your sign-off before going live.
             </p>
           </div>
