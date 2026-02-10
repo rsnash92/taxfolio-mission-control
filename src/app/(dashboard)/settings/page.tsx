@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/Toast";
 import ProjectContextEditor from "@/components/ops/ProjectContextEditor";
+import AgentControls from "@/components/ops/AgentControls";
+import CostTracker from "@/components/ops/CostTracker";
 
 interface PolicyItem {
   key: string;
@@ -157,6 +159,12 @@ export default function SettingsPage() {
             Save Auto-Approve Settings
           </button>
         </section>
+
+        {/* Agent Controls */}
+        <AgentControls />
+
+        {/* API Costs */}
+        <CostTracker />
 
         {/* Project Context Editor */}
         <ProjectContextEditor />

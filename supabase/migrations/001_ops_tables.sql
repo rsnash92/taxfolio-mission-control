@@ -156,6 +156,47 @@ CREATE TABLE IF NOT EXISTS ops_project_context (
 );
 CREATE INDEX IF NOT EXISTS idx_context_section ON ops_project_context(section);
 
+-- 12. Agent status (stop/start controls)
+CREATE TABLE IF NOT EXISTS ops_agent_status (
+  agent_id TEXT PRIMARY KEY,
+  is_active BOOLEAN DEFAULT true,
+  paused_at TIMESTAMPTZ,
+  paused_by TEXT DEFAULT 'rob',
+  reason TEXT,
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 13. API cost tracking
+CREATE TABLE IF NOT EXISTS ops_cost_log (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  mission_id UUID,
+  step_id UUID,
+  agent_id TEXT NOT NULL,
+  model TEXT NOT NULL DEFAULT 'claude-sonnet-4-5-20250929',
+  input_tokens INTEGER NOT NULL DEFAULT 0,
+  output_tokens INTEGER NOT NULL DEFAULT 0,
+  search_queries INTEGER NOT NULL DEFAULT 0,
+  estimated_cost_gbp NUMERIC(10,4) NOT NULL DEFAULT 0,
+  duration_seconds NUMERIC(10,1),
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_cost_log_agent ON ops_cost_log(agent_id);
+CREATE INDEX IF NOT EXISTS idx_cost_log_created ON ops_cost_log(created_at);
+
+-- Cost summary view (daily aggregates per agent)
+CREATE OR REPLACE VIEW ops_cost_summary AS
+SELECT
+  agent_id,
+  DATE(created_at) as day,
+  COUNT(*) as runs,
+  SUM(input_tokens) as total_input_tokens,
+  SUM(output_tokens) as total_output_tokens,
+  SUM(search_queries) as total_searches,
+  SUM(estimated_cost_gbp) as total_cost_gbp,
+  AVG(duration_seconds) as avg_duration_seconds
+FROM ops_cost_log
+GROUP BY agent_id, DATE(created_at);
+
 -- Seed default policies
 INSERT INTO ops_policy (key, value) VALUES
   ('x_daily_quota', '{"limit": 10}'),
@@ -163,3 +204,15 @@ INSERT INTO ops_policy (key, value) VALUES
   ('auto_approve', '{"enabled": false, "auto_approve_kinds": []}'),
   ('system_paused', '{"enabled": false}')
 ON CONFLICT (key) DO NOTHING;
+
+-- Seed agent status
+INSERT INTO ops_agent_status (agent_id, is_active) VALUES
+  ('system', true),
+  ('jarvis', true),
+  ('analyst', true),
+  ('scout', true),
+  ('writer', true),
+  ('growth', true),
+  ('reviewer', true),
+  ('dev', true)
+ON CONFLICT (agent_id) DO NOTHING;
