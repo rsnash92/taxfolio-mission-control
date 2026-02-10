@@ -4,6 +4,7 @@ interface ShortcutHandlers {
   onNewMission?: () => void;
   onBroadcast?: () => void;
   onChat?: () => void;
+  onJarvis?: () => void;
   onEscape?: () => void;
 }
 
@@ -27,6 +28,10 @@ export function useKeyboardShortcuts(handlers: ShortcutHandlers) {
         case "c":
           e.preventDefault();
           handlers.onChat?.();
+          break;
+        case "j":
+          e.preventDefault();
+          handlers.onJarvis?.();
           break;
         case "escape":
           handlers.onEscape?.();

@@ -10,6 +10,7 @@ import NewMissionModal from "@/components/NewMissionModal";
 import BroadcastModal from "@/components/BroadcastModal";
 import SquadChatModal from "@/components/SquadChatModal";
 import AgentProfileSlider from "@/components/AgentProfileSlider";
+import JarvisChat from "@/components/ops/JarvisChat";
 
 import { createContext, useContext, useMemo } from "react";
 import type { Mission, Approval, AgentEvent, Proposal } from "@/lib/types";
@@ -40,6 +41,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [showNewMission, setShowNewMission] = useState(false);
   const [showBroadcast, setShowBroadcast] = useState(false);
   const [showChat, setShowChat] = useState(false);
+  const [showJarvis, setShowJarvis] = useState(false);
   const [profileAgent, setProfileAgent] = useState<string | null>(null);
   const [systemPaused, setSystemPaused] = useState(false);
 
@@ -47,10 +49,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     onNewMission: () => setShowNewMission(true),
     onBroadcast: () => setShowBroadcast(true),
     onChat: () => setShowChat(true),
+    onJarvis: () => setShowJarvis((prev) => !prev),
     onEscape: () => {
       setShowNewMission(false);
       setShowBroadcast(false);
       setShowChat(false);
+      setShowJarvis(false);
       setProfileAgent(null);
     },
   }), []);
@@ -93,6 +97,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           onNewMission={() => setShowNewMission(true)}
           onBroadcast={() => setShowBroadcast(true)}
           onChat={() => setShowChat(true)}
+          onJarvis={() => setShowJarvis(true)}
           systemPaused={systemPaused}
           onTogglePause={handleTogglePause}
         />
@@ -126,6 +131,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <SquadChatModal
         isOpen={showChat}
         onClose={() => setShowChat(false)}
+      />
+
+      <JarvisChat
+        isOpen={showJarvis}
+        onClose={() => setShowJarvis(false)}
+        onMissionCreated={() => fetchData()}
       />
 
       <AgentProfileSlider

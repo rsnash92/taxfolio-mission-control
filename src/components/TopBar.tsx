@@ -9,6 +9,7 @@ interface TopBarProps {
   onNewMission?: () => void;
   onBroadcast?: () => void;
   onChat?: () => void;
+  onJarvis?: () => void;
   systemPaused?: boolean;
   onTogglePause?: () => void;
 }
@@ -19,6 +20,7 @@ export default function TopBar({
   onNewMission,
   onBroadcast,
   onChat,
+  onJarvis,
   systemPaused,
   onTogglePause,
 }: TopBarProps) {
@@ -72,6 +74,15 @@ export default function TopBar({
       </div>
 
       <div className="flex items-center gap-3">
+        {onJarvis && (
+          <button
+            onClick={onJarvis}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-semibold rounded-md bg-amber-50 border border-amber-200 text-amber-800 hover:bg-amber-100 transition-colors"
+            title="Talk to Jarvis (J)"
+          >
+            🤖 Jarvis
+          </button>
+        )}
         {onBroadcast && (
           <button
             onClick={onBroadcast}
