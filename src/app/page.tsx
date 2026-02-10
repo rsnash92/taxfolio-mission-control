@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { AGENTS, PRIORITY_COLORS } from "@/lib/agents";
+import { createSupabaseBrowser } from "@/lib/supabase-browser";
 
 type Agent = (typeof AGENTS)[keyof typeof AGENTS];
 
@@ -99,6 +101,14 @@ export default function Dashboard() {
   const [events, setEvents] = useState<AgentEvent[]>([]);
   const [feedFilter, setFeedFilter] = useState("All");
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    const supabase = createSupabaseBrowser();
+    await supabase.auth.signOut();
+    router.push("/login");
+    router.refresh();
+  };
 
   const fetchData = useCallback(async () => {
     try {
@@ -183,6 +193,12 @@ export default function Dashboard() {
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px] shadow-emerald-500" />
             <span className="text-emerald-500 font-semibold">System Online</span>
           </div>
+          <button
+            onClick={handleSignOut}
+            className="text-[11px] text-slate-500 hover:text-slate-300 transition-colors"
+          >
+            Sign Out
+          </button>
         </div>
       </header>
 

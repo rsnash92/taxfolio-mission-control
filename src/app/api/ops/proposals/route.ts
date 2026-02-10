@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase";
 import { createProposalAndMaybeAutoApprove } from "@/lib/proposal-service";
+import { requireAuth } from "@/lib/auth";
 
 export async function GET() {
+  const { error: authError } = await requireAuth();
+  if (authError) return authError;
+
   const sb = createServiceClient();
 
   const { data, error } = await sb
@@ -16,6 +20,9 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const { error: authError } = await requireAuth();
+  if (authError) return authError;
+
   const sb = createServiceClient();
   const body = await req.json();
 

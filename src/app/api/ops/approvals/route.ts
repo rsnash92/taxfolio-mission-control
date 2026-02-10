@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase";
+import { requireAuth } from "@/lib/auth";
 
 // GET - fetch pending approvals
 export async function GET() {
+  const { error: authError } = await requireAuth();
+  if (authError) return authError;
+
   const sb = createServiceClient();
 
   const { data, error } = await sb
@@ -17,6 +21,9 @@ export async function GET() {
 
 // PATCH - approve or reject
 export async function PATCH(req: NextRequest) {
+  const { error: authError } = await requireAuth();
+  if (authError) return authError;
+
   const sb = createServiceClient();
   const body = await req.json();
   const { id, action, notes } = body;

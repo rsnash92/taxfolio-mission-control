@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase";
+import { requireAuth } from "@/lib/auth";
 
 export async function GET(req: NextRequest) {
+  const { error: authError } = await requireAuth();
+  if (authError) return authError;
+
   const sb = createServiceClient();
   const { searchParams } = new URL(req.url);
   const status = searchParams.get("status");
